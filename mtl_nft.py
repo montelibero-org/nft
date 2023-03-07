@@ -3,15 +3,15 @@
 # pylint: disable=missing-module-docstring
 
 
-from stellar_sdk import (Asset, Keypair, Network, Server, TransactionBuilder)
+from stellar_sdk import Asset, Keypair, Network, Server, TransactionBuilder
 
 
 OPERATOR_KP = Keypair.from_secret('')
 
-ISSUER_KP = Keypair.from_secret('SBS7IY2KLXIQKZH6IJSMCV7WPRC3WIOIXU6IZZJ4WM6ICNTCDSBXND4K')
-ISSUER_ACCOUNT = ISSUER_KP.public_key  # GDDTITOAZSV6OFHQJ5H2BALN7SNF4RGKZLSEIUA4RTJK44VCWTXEPNFT
+ISSUER_KP = Keypair.from_secret('SBDEK5W6N75AC6Q4WB6DTJNJTJHNBWTE4HWTRPUFLTXY3XBFCSQKQYJN')
+ISSUER_ACCOUNT = ISSUER_KP.public_key  # GA6I6NJ2U5N7TSSPT6W6E6S46FGX5BJNKQOCPW4ADRA227PUVLQVYNFT
 
-TOKEN_NAMES = [f'BP1369p12a{a}' for a in range(1, 9)]
+TOKEN_NAMES = [f'BP1369p{a}' for a in range(40, 41)]
 
 TOKENS = [Asset(name, ISSUER_ACCOUNT) for name in TOKEN_NAMES]
 
@@ -45,6 +45,7 @@ class TokenBuilder(TransactionBuilder):
     def mint_to(self, asset: Asset, receiver: str):
         self.append_change_trust_op(
             asset,
+            limit=ATOMIC_TOKEN,
             source=
                 None
                 if receiver == self.source_account.account.account_id
@@ -53,6 +54,9 @@ class TokenBuilder(TransactionBuilder):
         self.append_payment_op(
             receiver, asset, ATOMIC_TOKEN, source=ISSUER_ACCOUNT
         )
+
+    def mint(self, asset: Asset):
+        self.mint_to(asset, DISTRIBUTOR_KP.public_key)
 
     def lock_issuer(self):
         self.append_set_options_op(master_weight=0, source=ISSUER_ACCOUNT)
@@ -63,18 +67,38 @@ class TokenBuilder(TransactionBuilder):
             transaction.sign(signer)
         return transaction
 
+    def send(self, asset: Asset, source: str, destination: str):
+        self.append_payment_op(destination, asset, ATOMIC_TOKEN, source)
+
+    def send_from_distributor(self, asset: Asset, destination: str):
+        self.send(
+            asset, source=DISTRIBUTOR_KP.public_key, destination=destination
+        )
+
+    def untrust(self, asset: Asset):
+        self.append_change_trust_op(
+            asset, limit='0', source=DISTRIBUTOR_KP.public_key
+        )
+
+    def burn_and_untrust(self, asset: Asset):
+        self.send(
+            asset,
+            source=DISTRIBUTOR_KP.public_key,
+            destination = asset.issuer or '',
+        )
+        self.untrust(asset)
+
 
 def main():
     builder = TokenBuilder()
     builder.create_and_init_issuer()
-    # .set_issuer_data(k, v)
     for token in TOKENS:
-        builder.mint_to(token, DISTRIBUTOR_KP.public_key)
+        builder.mint(token)
     builder.lock_issuer()
 
     transaction = builder.build_and_sign([ISSUER_KP, OPERATOR_KP])
     print(transaction.to_xdr())
-    # print(SERVER.submit_transaction(transaction))
+    print(SERVER.submit_transaction(transaction))
 
 
 if __name__ == '__main__':
