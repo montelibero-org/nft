@@ -1,0 +1,63 @@
+VERSION="2.5.0"
+
+NETWORK_PASSPHRASE="Public Global Stellar Network ; September 2015"
+
+[DOCUMENTATION]
+ORG_NAME="MTL NFT ASSETS"
+ORG_DBA="MTL NFT ASSETS"
+ORG_URL="https://nft.montelibero.org"
+ORG_LOGO="https://montelibero.org/images/logo.png"
+ORG_DESCRIPTION=""
+ORG_GITHUB="montelibero-org"
+ORG_OFFICIAL_EMAIL="montelibero.fspe@gmail.com"
+ORG_SUPPORT_EMAIL="montelibero.fspe@gmail.com"
+
+[[CURRENCIES]]
+code="UB929"
+issuer="?"
+name="Plot 929"
+desc="NFT fixing full ownership rights in the MTL tokenomics for plot № 929 in the Ulcinj Brajše district, via the State Cadastre of Montenegro."
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/UB929.png"
+
+[[CURRENCIES]]
+code="UB930"
+issuer="?"
+name="Plot 930"
+desc="NFT fixing full ownership rights in the MTL tokenomics for plot № 930 in the Ulcinj Brajše district, via the State Cadastre of Montenegro."
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/UB930.png"
+
+[[CURRENCIES]]
+code="UB2109"
+issuer="?"
+name="Plot 2109"
+desc="NFT fixing full ownership rights in the MTL tokenomics for plot № 2109 in the Ulcinj Brajše district, via the State Cadastre of Montenegro."
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/UB2109.png"
+
+[[CURRENCIES]]
+code="UB2116"
+issuer="?"
+name="Plot 2116"
+desc="NFT fixing full ownership rights in the MTL tokenomics for plot № 2116 in the Ulcinj Brajše district, via the State Cadastre of Montenegro."
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/UB2116.png"
+
+[[CURRENCIES]]
+code="UB2117"
+issuer="?"
+name="Plot 2117"
+desc="NFT fixing full ownership rights in the MTL tokenomics for plot № 2117 in the Ulcinj Brajše district, via the State Cadastre of Montenegro."
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/UB2117.png"
