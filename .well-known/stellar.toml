@@ -61,3 +61,43 @@ status="live"
 display_decimals=0
 is_unlimited=false
 image="https://nft.montelibero.org/images/UB2117.png"
+
+[[CURRENCIES]]
+code="Hub1369p14"
+issuer="GCTE2BR4WYD73Y3KRC6JOX2LYFH5WKAWO7VYCZXVZ5XLNWMYCIQFDNFT"
+name="Corporate hub"
+desc="Corporate hub at plot 1369/14"
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/Hub1369p14.jpeg"
+
+[[CURRENCIES]]
+code="MtlDome001"
+issuer="GCTE2BR4WYD73Y3KRC6JOX2LYFH5WKAWO7VYCZXVZ5XLNWMYCIQFDNFT"
+name="Dome 001"
+desc="Dome 001"
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/MtlDome001.jpeg"
+
+[[CURRENCIES]]
+code="MtlDome002"
+issuer="GCTE2BR4WYD73Y3KRC6JOX2LYFH5WKAWO7VYCZXVZ5XLNWMYCIQFDNFT"
+name="Dome 002"
+desc="Dome 002"
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/MtlDome002.jpeg"
+
+[[CURRENCIES]]
+code="WH1369p20"
+issuer="GCTE2BR4WYD73Y3KRC6JOX2LYFH5WKAWO7VYCZXVZ5XLNWMYCIQFDNFT"
+name="Warehouse"
+desc="Warehouse at plot 1369/20"
+status="live"
+display_decimals=0
+is_unlimited=false
+image="https://nft.montelibero.org/images/WH1369p20.jpeg"
