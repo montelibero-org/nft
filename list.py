@@ -5,11 +5,11 @@
 # pylint: disable=missing-module-docstring
 
 
-from collections import defaultdict
+from argparse import ArgumentParser, Namespace
 from decimal import Decimal
-from stellar_sdk import Asset, Server
-import sys
 from typing import Optional
+
+from stellar_sdk import Asset, Server
 import yaml
 
 
@@ -38,11 +38,26 @@ def get_holder(code: str, issuer: str) -> Optional[str]:
     return holders[0] if holders else None
 
 
-def main():
+def parse_args() -> Namespace:
+    arp = ArgumentParser()
+    arp.add_argument("-i", "--issuer", action="store_true", help="Show token issuers")
+    arp.add_argument("-o", "--other", action="store_true", help="Show other holders")
+    return arp.parse_args()
+
+
+def check_insert(adict: dict[str, str], k: str, value: str) -> None:
+    if k in adict:
+        raise ValueError("Asset code conflict")
+    adict[k] = value
+
+
+def main() -> None:
+    args = parse_args()
+
     smithy = get_account()
     balances = smithy["balances"]
-    trust = defaultdict(set)
-    hold = defaultdict(set)
+    trust: dict[str, str] = {}
+    hold: dict[str, str] = {}
     for asset in balances:
         if asset["asset_type"] == "native":
             continue
@@ -50,31 +65,33 @@ def main():
         balance_raw = int(Decimal(asset["balance"]) * Decimal(10_000_000))
         issuer = asset["asset_issuer"]
         if balance_raw == 0:
-            trust[code].add((code, issuer))
+            check_insert(trust, code, issuer)
         elif balance_raw == 1:
-            hold[code].add((code, issuer))
+            check_insert(hold, code, issuer)
         else:
             raise NotImplementedError
-    for asset in trust.values():
-        if len(asset) != 1:
-            raise ValueError("asset code conflict", asset)
-    trust = {code: issuer for [(code, issuer)] in trust.values()}
-    for asset in hold.values():
-        if len(asset) != 1:
-            raise ValueError("asset code conflict", asset)
     print(
         yaml.dump(
             {
-                "Smithy trusts": ", ".join(trust.keys()),
-                "Smithy holds": ", ".join(hold.keys()),
+                "Smithy trusts": ", ".join(
+                    (f"{code}-{issuer}" for code, issuer in trust.items())
+                    if args.issuer
+                    else trust.keys()
+                ),
+                "Smithy holds": ", ".join(
+                    (f"{code}-{issuer}" for code, issuer in hold.items())
+                    if args.issuer
+                    else hold.keys()
+                ),
             }
         )
     )
 
-    if "-o" in sys.argv:
+    if args.other:
         print("Other holders:")
-        for code, issuer in list(trust.items()):
-            print(f"  {code} is held by ", end="")
+        for code, issuer in trust.items():
+            asset = f"{code}-{issuer}" if args.issuer else code
+            print(f"  {asset} is held by ", end="")
             print(get_holder(code, issuer))
 
 
