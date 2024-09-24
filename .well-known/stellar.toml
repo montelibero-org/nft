@@ -63,14 +63,14 @@ is_unlimited=false
 image="https://nft.montelibero.org/images/UB2117.png"
 
 [[CURRENCIES]]
-code="Hub1369p14"
-issuer="GCTE2BR4WYD73Y3KRC6JOX2LYFH5WKAWO7VYCZXVZ5XLNWMYCIQFDNFT"
+code="Hub1369p13"
+issuer="GBGWJMXGISX5YXQMTWOPJT6QZADQLFJPHREXDTM7JJCSOZWC7BVM3NFT"
 name="Montelibero-City Corporate hub"
-desc="Corporate hub at plot 1369/14"
+desc="Corporate hub at plot 1369/13"
 status="live"
 display_decimals=0
 is_unlimited=false
-image="https://nft.montelibero.org/images/Hub1369p14.jpeg"
+image="https://nft.montelibero.org/images/Hub1369p13.jpeg"
 
 [[CURRENCIES]]
 code="MtlDome001"
