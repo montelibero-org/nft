@@ -51,6 +51,10 @@ def check_insert(adict: dict[str, str], k: str, value: str) -> None:
     adict[k] = value
 
 
+def shorten_address(address: str) -> str:
+    return "*" + address[-4:]
+
+
 def main() -> None:
     args = parse_args()
 
@@ -91,8 +95,8 @@ def main() -> None:
         print("Other holders:")
         for code, issuer in trust.items():
             asset = f"{code}-{issuer}" if args.issuer else code
-            print(f"  {asset} is held by ", end="")
-            print(get_holder(code, issuer))
+            print(f"  {asset:11} is held by ", end="")
+            print(shorten_address(get_holder(code, issuer)))
 
 
 if __name__ == "__main__":
