@@ -66,7 +66,14 @@ image="https://nft.montelibero.org/images/UB2117.png"
 code="Hub1369p13"
 issuer="GBGWJMXGISX5YXQMTWOPJT6QZADQLFJPHREXDTM7JJCSOZWC7BVM3NFT"
 name="Montelibero-City Corporate hub"
-desc="Corporate hub at plot 1369/13"
+desc="""\
+  Corporate hub with plot 1369/13.
+
+  This NFT also secures property rights in MTL tokenomics for plot No. 1369/13 in the Pečurice area of the Bar municipality. The land area is 163.89 sq. m. The land boundaries are:
+  42.032273	19.166325
+  42.03215	19.166476
+  42.03208	19.166413
+  42.032248	19.166268"""
 status="live"
 display_decimals=0
 is_unlimited=false
@@ -96,7 +103,14 @@ image="https://nft.montelibero.org/images/MtlDome002.jpeg"
 code="WH1369p20"
 issuer="GCTE2BR4WYD73Y3KRC6JOX2LYFH5WKAWO7VYCZXVZ5XLNWMYCIQFDNFT"
 name="Montelibero-City Warehouse"
-desc="Montelibero-City Warehouse at plot 1369/20"
+desc="""\
+  Montelibero-City Warehouse at plot 1369/20.
+
+  This NFT also secures property rights in MTL tokenomics for plot No. 1369/20 in the Pečurice area of the Bar municipality. The land area is 368.88 sq. m. The land boundaries are:
+  42.032882	19.165912
+  42.032751	19.166079
+  42.032603	19.165894
+  42.032786	19.165792"""
 status="live"
 display_decimals=0
 is_unlimited=false
